@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const dropdown = document.getElementById('dropdown');
   const details = document.getElementById('details');
-  // Use a CORS proxy to fetch the Google Sheet CSV
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1CHRGmoweIWLhE2FkeiiGm0U2ECnL6zzb4D3-3RGlr2k/export?format=csv';
+  // Use a CORS proxy to fetch the new Google Sheet CSV
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1fUZKqMpARGJ1XEvsmGlOtN2_NVPOqLehPNiLH-YyYSI/export?format=csv';
   const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
   const FETCH_URL = CORS_PROXY + encodeURIComponent(SHEET_CSV_URL);
 
@@ -54,14 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Papa.parse(FETCH_URL, {
     download: true,
-    header: true,
+    header: false,
     complete: function(results) {
-      if (!results.data || results.data.length === 0) {
+      const allRows = results.data;
+      // Only process if enough rows
+      if (!allRows || allRows.length < 3) {
         details.innerHTML = 'No data found in the sheet.';
         return;
       }
-      // Filter out empty rows
-      sheetData = results.data.filter(row => Object.values(row)[0] && Object.values(row)[0].trim() !== '');
+      // Row 0: skip, Row 1: headers, Row 2-28: data (ignore row 30 and beyond)
+      const headers = allRows[1];
+      const dataRows = allRows.slice(2, 29); // up to but not including row 29 (1-based row 30)
+      // Map each data row to an object using headers
+      sheetData = dataRows
+        .filter(row => row && row.length && row[0] && row[0].trim() !== '')
+        .map(row => {
+          const obj = {};
+          headers.forEach((header, i) => {
+            obj[header] = row[i] || '';
+          });
+          return obj;
+        });
       renderDropdown(sheetData);
       renderDetails(null);
     },
