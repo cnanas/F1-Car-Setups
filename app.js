@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dropdown.innerHTML = '';
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
-    defaultOption.textContent = 'Select...';
+    defaultOption.textContent = 'Select Track...';
     dropdown.appendChild(defaultOption);
 
     data.forEach((row, idx) => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderDetails(row) {
     if (!row) {
-      details.innerHTML = 'Select an item from the dropdown to view details.';
+      details.innerHTML = 'Select an item from the dropdown to view track details.';
       return;
     }
     let html = '<table>';
