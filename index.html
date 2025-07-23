@@ -9,17 +9,20 @@
 <body>
   <div class="container">
     <h1>F1 2025 Car Setups</h1>
-    <div class="source-link">
-      <a href="https://docs.google.com/spreadsheets/d/1fUZKqMpARGJ1XEvsmGlOtN2_NVPOqLehPNiLH-YyYSI/edit?gid=1370671685#gid=1370671685" target="_blank" rel="noopener noreferrer">
-        Original source
-      </a>
-    </div>
     <select id="dropdown">
       <option value="">Loading...</option>
     </select>
+    <div class="toggle-section">
+      <div class="toggle-switch">
+        <input type="radio" id="sheet1" name="sheet-toggle" value="sheet1" checked>
+        <label for="sheet1" class="toggle-label left">Setup 1</label>
+        <input type="radio" id="sheet2" name="sheet-toggle" value="sheet2">
+        <label for="sheet2" class="toggle-label right">Setup 2</label>
+      </div>
+    </div>
     <div id="details"></div>
+    <div id="dynamic-source-link"></div>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="app.js"></script>
 </body>
