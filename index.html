@@ -7,8 +7,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>F1 2025 Car Setups</h1>
+  <header class="main-header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <span class="site-title">F1 2025 Car Setups</span>
+  </header>
+  <nav class="side-menu" id="sideMenu">
+    <ul>
+      <li><a href="#">Car Setups</a></li>
+    </ul>
+  </nav>
+  <main>
     <select id="dropdown">
       <option value="">Loading...</option>
     </select>
@@ -22,8 +34,22 @@
     </div>
     <div id="details"></div>
     <div id="dynamic-source-link"></div>
-  </div>
+  </main>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script src="app.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const sideMenu = document.getElementById('sideMenu');
+    hamburger.addEventListener('click', () => {
+      sideMenu.classList.toggle('open');
+    });
+    // Close menu on click outside
+    document.addEventListener('click', (e) => {
+      if (!sideMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        sideMenu.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>

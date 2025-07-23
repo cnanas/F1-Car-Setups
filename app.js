@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     "Great Britain": "Silverstone",
     "Silverstone": "Silverstone",
     "Azerbaijan": "Baku",
-    "Baku": "Baku"
+    "Baku": "Baku",
+    "United States": "Texas",
+    "Texas": "Texas"
   };
 
   function normalizeTrack(name) {
@@ -90,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dropdown.innerHTML = '';
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
-    defaultOption.textContent = 'Select Track...';
+    defaultOption.textContent = 'Select...';
     dropdown.appendChild(defaultOption);
 
     tracks.forEach(track => {
