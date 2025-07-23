@@ -17,13 +17,19 @@
   </header>
   <nav class="side-menu" id="sideMenu">
     <ul>
-      <li><a href="/F1-Car-Setups/">Car Setups</a></li>
+      <li><a href="/">Car Setups</a></li>
     </ul>
   </nav>
   <main>
-    <select id="dropdown">
-      <option value="">Loading...</option>
-    </select>
+    <div class="share-row">
+      <select id="dropdown">
+        <option value="">Loading...</option>
+      </select>
+      <button id="share-btn" class="share-btn" title="Share this setup" aria-label="Share">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6c63ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51l-6.82 3.98"/></svg>
+        <span class="share-text">Share Track Information</span>
+      </button>
+    </div>
     <div class="toggle-section">
       <div class="toggle-switch">
         <input type="radio" id="sheet1" name="sheet-toggle" value="sheet1" checked>

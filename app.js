@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleSection = document.querySelector('.toggle-section');
   const sheetToggles = document.getElementsByName('sheet-toggle');
   const sourceLinkDiv = document.getElementById('dynamic-source-link');
+  const shareBtn = document.getElementById('share-btn');
 
   // Sheet 1 (main)
   const SHEET1_CSV_URL = 'https://docs.google.com/spreadsheets/d/1fUZKqMpARGJ1XEvsmGlOtN2_NVPOqLehPNiLH-YyYSI/export?format=csv';
@@ -37,7 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
   let allTracks = [];
   let currentSheet = 'sheet1';
 
-  function fetchSheet(url, rowStart, rowEnd, headerRow, callback) {
+  // Caching helpers
+  function getCache(key) {
+    try {
+      const cached = JSON.parse(localStorage.getItem(key));
+      if (!cached) return null;
+      // Check if less than 24 hours old
+      if (Date.now() - cached.timestamp < 24 * 60 * 60 * 1000) {
+        return cached.data;
+      }
+    } catch {}
+    return null;
+  }
+  function setCache(key, data) {
+    localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+  }
+
+  function fetchSheet(url, rowStart, rowEnd, headerRow, cacheKey, callback) {
+    const cached = getCache(cacheKey);
+    if (cached) {
+      callback(cached);
+      return;
+    }
     Papa.parse(CORS_PROXY + encodeURIComponent(url), {
       download: true,
       header: false,
@@ -60,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             obj._normalizedTrack = normalizeTrack(Object.values(obj)[0]);
             return obj;
           });
+        setCache(cacheKey, data);
         callback(data);
       },
       error: function(err) {
@@ -150,6 +173,35 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSourceLink();
   }
 
+  function getCurrentShareUrl() {
+    const track = dropdown.value;
+    if (!track) return window.location.origin + window.location.pathname;
+    const params = new URLSearchParams();
+    params.set('track', track);
+    params.set('setup', currentSheet);
+    return window.location.origin + window.location.pathname + '?' + params.toString();
+  }
+
+  function setFromQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    const track = params.get('track');
+    const setup = params.get('setup');
+    if (setup && (setup === 'sheet1' || setup === 'sheet2')) {
+      const radio = document.getElementById(setup);
+      if (radio) {
+        radio.checked = true;
+        currentSheet = setup;
+      }
+    }
+    if (track) {
+      // Wait for dropdown to be populated
+      setTimeout(() => {
+        dropdown.value = track;
+        renderDetails(track);
+      }, 100);
+    }
+  }
+
   dropdown.addEventListener('change', (e) => {
     renderDetails(dropdown.value);
   });
@@ -161,16 +213,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  if (shareBtn) {
+    shareBtn.addEventListener('click', () => {
+      const url = getCurrentShareUrl();
+      if (navigator.share) {
+        navigator.share({
+          title: 'F1 2025 Car Setup',
+          url
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          shareBtn.classList.add('shared');
+          shareBtn.title = "Link copied!";
+          setTimeout(() => {
+            shareBtn.classList.remove('shared');
+            shareBtn.title = "Share this setup";
+          }, 1200);
+        });
+      }
+    });
+  }
+
   details.innerHTML = 'Loading data...';
 
   // Fetch both sheets, then render
-  fetchSheet(SHEET1_CSV_URL, 2, 29, 1, (data1) => {
+  fetchSheet(SHEET1_CSV_URL, 2, 29, 1, 'sheet1Cache', (data1) => {
     sheet1Data = data1;
-    fetchSheet(SHEET2_CSV_URL, 1, 26, 0, (data2) => {
+    fetchSheet(SHEET2_CSV_URL, 1, 26, 0, 'sheet2Cache', (data2) => {
       sheet2Data = data2;
       allTracks = getAllUniqueTracks();
       renderDropdown(allTracks);
       renderDetails(null);
+      setFromQueryParams();
     });
   });
 });

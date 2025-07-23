@@ -88,8 +88,47 @@ body {
 /* Main content */
 main {
   max-width: 480px;
-  margin: 1rem auto 0 auto;
+  margin: 2.5rem auto 0 auto;
   padding: 0 18px 2rem 18px;
+}
+
+.share-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  background: #f8fafc;
+  color: #6c63ff;
+  border: 1.5px solid #e0e3eb;
+  border-radius: 10px;
+  padding: 0.55em 1.1em;
+  font-size: 1.01rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, border 0.18s;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(30,34,90,0.03);
+}
+.share-btn:hover, .share-btn.shared {
+  background: #eae6ff;
+  border-color: #6c63ff;
+}
+.share-btn svg {
+  margin-right: 0.3em;
+  min-width: 22px;
+}
+.share-text {
+  display: inline-block;
+  color: #6c63ff;
+  font-weight: 500;
+  font-size: 1.01rem;
+  letter-spacing: -0.1px;
 }
 
 h1, .site-title {
@@ -103,7 +142,7 @@ select {
   font-size: 1.1rem;
   border-radius: 12px;
   border: 1.5px solid #e0e3eb;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   background: #f8fafc;
   appearance: none;
   -webkit-appearance: none;
@@ -138,7 +177,7 @@ select:focus {
 .toggle-label {
   flex: 1 1 0;
   text-align: center;
-  font-size: .8rem;
+  font-size: 1.05rem;
   font-weight: 500;
   color: #888;
   cursor: pointer;
@@ -212,7 +251,7 @@ select:focus {
 @media (max-width: 600px) {
   main {
     max-width: 99vw;
-    padding: 0 20px 2rem 20px;
+    padding: 0 8px 2rem 8px;
   }
   .main-header {
     padding: 0 0.5rem;
@@ -220,5 +259,14 @@ select:focus {
   .toggle-switch {
     width: 160px;
     height: 36px;
+  }
+  .share-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .share-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
