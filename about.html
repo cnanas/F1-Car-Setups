@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | F1 2025 Car Setups</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="main-header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <span class="site-title">F1 2025 Car Setups</span>
+  </header>
+  <nav class="side-menu" id="sideMenu"></nav>
+  <main>
+    <h2>About</h2>
+    <p>
+      <strong>F1 2025 Car Setups</strong> is a community-driven resource for finding the ideal car setups for the F1 2025 game. This app helps you optimize your car's performance for every track, whether you're a beginner or a seasoned racer.
+    </p>
+    <p style="font-size: 0.95em; color: #6c757d; font-style: italic;">
+      Data Source: All setup data provided in this app is sourced from two dedicated members of the F1 gaming community. Special thanks to them for their expertise and willingness to share their knowledge. The app creator does not claim ownership of the setup data.
+    </p>
+    <h3>How to Use This App</h3>
+    <ol>
+      <li>Browse the <strong>Car Setups</strong> page to find the recommended settings for each track.</li>
+      <li>Tap on a track to view its ideal setup values (such as aerodynamics, suspension, tire pressures, etc.).</li>
+      <li>Open F1 2025 on your device or console and navigate to the car setup menu for the corresponding track.</li>
+      <li>Manually input the values from this app into the game’s setup fields.</li>
+      <li>Save your setup in-game and enjoy improved performance!</li>
+    </ol>
+    <p>
+      <strong>Note:</strong> Always double-check that you are entering the values for the correct track and weather conditions. For best results, experiment and adjust based on your driving style.
+    </p>
+    <p>
+      If you have feedback or want to contribute, please reach out to the community!
+    </p>
+  </main>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const sideMenu = document.getElementById('sideMenu');
+    hamburger.addEventListener('click', () => {
+      sideMenu.classList.toggle('open');
+    });
+    // Close menu on click outside
+    document.addEventListener('click', (e) => {
+      if (!sideMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        sideMenu.classList.remove('open');
+      }
+    });
+  </script>
+  <script src="js/menu.js"></script>
+</body>
+</html>

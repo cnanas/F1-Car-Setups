@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tire Compounds | F1 2025 Car Setups</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="main-header">
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <span class="site-title">F1 2025 Car Setups</span>
+  </header>
+  <nav class="side-menu" id="sideMenu"></nav>
+  <main>
+    <h2>Tire Compounds</h2>
+    <div style="width: 100%; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2rem;">
+      <div style="flex: 1 1 100%; text-align: center;">
+        <img src="assets/images/pirelli-f1-tyres-2024-1.jpeg" alt="F1 Tire Compounds" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #eee;">
+      </div>
+      <div style="overflow-x: auto; flex: 1 1 100%;">
+        <table style="border-collapse: collapse; min-width: 500px; font-size: 0.98em;">
+          <thead>
+            <tr style="background: #222; color: #fff;">
+              <th style="padding: 6px 10px;">Compound</th>
+              <th style="padding: 6px 10px;">Temp Range (°C)</th>
+              <th style="padding: 6px 10px;">Temp Range (°F)</th>
+              <th style="padding: 6px 10px;">Issues</th>
+              <th style="padding: 6px 10px;">Fixes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: bold;">C1</td>
+              <td>95 - 115</td>
+              <td>203 - 239</td>
+              <td>Understeer</td>
+              <td>more fw, less off diff, lower front arb, lower bbal</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #888;">C2</td>
+              <td>85 - 115</td>
+              <td>185 - 239</td>
+              <td>Oversteer</td>
+              <td>less fw, more off diff, more front arb, less rear arb</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: orange;">C3</td>
+              <td>85 - 95</td>
+              <td>185 - 203</td>
+              <td>High-speed snap</td>
+              <td>more rw, less rear arb</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #e74c3c;">C4</td>
+              <td>75 - 95</td>
+              <td>167 - 203</td>
+              <td>Low-speed snap</td>
+              <td>more rw, higher rear rh</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #ff0000;">C5</td>
+              <td>75 - 85</td>
+              <td>167 - 185</td>
+              <td>Poor traction</td>
+              <td>more rw, higher rear rh</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #b71c1c;">C6</td>
+              <td>65 - 85</td>
+              <td>149 - 185</td>
+              <td>Poor rotation</td>
+              <td>lower bbal, smoother on brakes</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #27ae60;">Intermediate</td>
+              <td>55 - 75</td>
+              <td>131 - 167</td>
+              <td>Unpredictable high-speed</td>
+              <td>check fw, rw and arbs</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold; color: #2980b9;">Full Wet</td>
+              <td>55 - 65</td>
+              <td>131 - 149</td>
+              <td>Can't take kerbs others can</td>
+              <td>Problem in Chair, not in Car (PICNIC)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p style="margin-top: 1.5em;">
+      <strong>Tip:</strong> Choosing the right tire and keeping it in the optimal temperature range can make a big difference in your race results. Use the fixes above to address common issues and experiment to find what works best for your driving style and track conditions.
+    </p>
+  </main>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const sideMenu = document.getElementById('sideMenu');
+    hamburger.addEventListener('click', () => {
+      sideMenu.classList.toggle('open');
+    });
+    // Close menu on click outside
+    document.addEventListener('click', (e) => {
+      if (!sideMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        sideMenu.classList.remove('open');
+      }
+    });
+  </script>
+  <script src="js/menu.js"></script>
+</body>
+</html>
